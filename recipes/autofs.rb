@@ -16,3 +16,30 @@ end
 service 'autofs' do
   action [:enable, :start]
 end
+
+cookbook_file '/etc/auto.master' do
+  source 'auto.master'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  action :create
+  notifies :restart, 'service[autofs]', :immediately
+end
+
+cookbook_file '/etc/auto.direct' do
+  source 'auto.direct'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  action :create
+  notifies :restart, 'service[autofs]', :immediately
+end
+
+cookbook_file '/etc/auto.home' do
+  source 'auto.home'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  action :create
+  notifies :restart, 'service[autofs]', :immediately
+end
