@@ -9,8 +9,10 @@
 # Copy the auto.master, auto.direct, and auto.home templates
 # Reload autofs if any of the files are changed
 
-package 'autofs' do
-  action :install
+%w(autofs nfs-utils).each do |pkg|
+  package pkg do
+    action :install
+  end
 end
 
 service 'autofs' do
