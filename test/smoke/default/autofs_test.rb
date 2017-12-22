@@ -20,3 +20,17 @@ describe file('/etc/auto.direct') do
   its('group') { should eq 'root' }
   its('mode') { should cmp '0600' }
 end
+
+describe file('/etc/auto.master') do
+  it { should exist }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+  its('mode') { should cmp '0600' }
+end
+
+describe file('/etc/auto.home') do
+  it { should exist }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+  its('mode') { should cmp '0600' }
+end

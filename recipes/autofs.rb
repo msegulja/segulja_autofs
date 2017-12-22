@@ -9,10 +9,39 @@
 # Copy the auto.master, auto.direct, and auto.home templates
 # Reload autofs if any of the files are changed
 
-package 'autofs' do
-  action :install
+%w(autofs nfs-utils).each do |pkg|
+  package pkg do
+    action :install
+  end
 end
 
 service 'autofs' do
   action [:enable, :start]
+end
+
+cookbook_file '/etc/auto.master' do
+  source 'auto.master'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  action :create
+  notifies :restart, 'service[autofs]', :immediately
+end
+
+cookbook_file '/etc/auto.direct' do
+  source 'auto.direct'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  action :create
+  notifies :restart, 'service[autofs]', :immediately
+end
+
+cookbook_file '/etc/auto.home' do
+  source 'auto.home'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  action :create
+  notifies :restart, 'service[autofs]', :immediately
 end

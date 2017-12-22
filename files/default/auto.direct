@@ -1,0 +1,1 @@
+/server     -fstype=nfs     server:/mnt/pool1/data
